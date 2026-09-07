@@ -1,0 +1,11 @@
+{
+  "packageName": "com.example.app",
+  "track": "alpha",
+  "versionName": "1.0.0",
+  "versionCode": "42",
+  "artifact": "./app-release.aab",
+  "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "uploadCertificateSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "expectedConfigurationSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "releaseNotes": [{ "language": "en-US", "text": "Describe the reviewed changes here." }]
+}

@@ -6,6 +6,7 @@
   },
   "include": ["src/**/*.ts"],
   "references": [
+    { "path": "../google-play" },
     { "path": "../core" }
   ]
 }

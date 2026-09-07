@@ -35,9 +35,9 @@ The Chrome adapter will target API v2 and support existing items only. Initial i
 
 The first implementation milestone is read-only `fetchStatus`. Upload, publish, staged publish, percentage rollout, and cancellation follow after status fixtures and authentication are tested.
 
-## Planned Google Play adapter
+## Google Play adapter
 
-The Play adapter will initially inspect applications, tracks, releases, testers, and country availability. Publication will use a fresh edit, bundle upload, exact track update, validation, commit, and lifecycle reconciliation.
+The Play adapter implements testing-track publication through a fresh edit, verified bundle upload, exact track update, validation, guarded commit and lifecycle reads. Upload, validate and submit are separate journaled commands. Status and wait are pure reads, while configuration inspection creates a temporary edit. See the [provider guide](../providers/google-play/README.md) for the supported scope and recovery limits.
 
 An existing review is a conflict. The adapter must not cancel or supersede it implicitly.
 
