@@ -1,4 +1,0 @@
-interface:
-  display_name: "Google Store Publisher"
-  short_description: "Safely manage Google store releases"
-  default_prompt: "Use $store-publisher to inspect or manage this store release safely."

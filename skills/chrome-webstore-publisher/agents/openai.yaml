@@ -1,0 +1,4 @@
+interface:
+  display_name: "Chrome Web Store Publisher"
+  short_description: "Publish and inspect Chrome extension releases"
+  default_prompt: "Use $chrome-webstore-publisher to inspect or publish this Chrome extension release."
