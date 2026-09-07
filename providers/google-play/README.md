@@ -1,6 +1,6 @@
 # Google Play provider
 
-The implementation supports existing testing tracks with one AAB per release and full rollout. Production and staged-rollout management are unsupported. Chrome, skills and MCP remain follow-up work.
+The implementation supports existing testing tracks with one AAB per release and full rollout. Production and staged-rollout management are unsupported. Chrome Web Store support and the shared skill are implemented separately in this repository. MCP remains follow-up work.
 
 ## Setup
 

@@ -3,6 +3,7 @@
   "references": [
     { "path": "./packages/google-play" },
     { "path": "./packages/core" },
+    { "path": "./providers/chrome-web-store" },
     { "path": "./packages/cli" }
   ]
 }

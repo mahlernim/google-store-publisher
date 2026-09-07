@@ -29,11 +29,11 @@ Every provider implements the same high-level capabilities where they genuinely 
 
 Provider-native states remain available in every result. A normalized state is supplemental and must never replace the native state needed for operational decisions.
 
-## Planned Chrome Web Store adapter
+## Chrome Web Store adapter
 
 The Chrome adapter will target API v2 and support existing items only. Initial item creation, visibility changes, policy questionnaires, and listing setup remain dashboard operations.
 
-The first implementation milestone is read-only `fetchStatus`. Upload, publish, staged publish, percentage rollout, and cancellation follow after status fixtures and authentication are tested.
+The adapter implements `fetchStatus`, ZIP upload, publish, staged publish, percentage rollout, and cancellation. It accepts an injected short-lived token or obtains one through Google Cloud CLI service-account impersonation. The CLI validates artifacts, enforces expected versions, detects conflicting submissions, and reconciles status after mutations.
 
 ## Google Play adapter
 
@@ -43,4 +43,4 @@ An existing review is a conflict. The adapter must not cancel or supersede it im
 
 ## Automation layers
 
-The CLI is the source of truth. CI workflows call the CLI. A future skill explains when and how to call it. A future MCP server exposes only bounded CLI capabilities and adds no publishing logic of its own.
+The CLI is the source of truth. CI workflows and the installable skill call the CLI. A future MCP server exposes only bounded CLI capabilities and adds no publishing logic of its own.

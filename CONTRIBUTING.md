@@ -15,3 +15,5 @@ Keep provider-specific behavior inside its provider adapter. Shared code may nor
 Never commit credentials, access tokens, refresh tokens, service-account keys, signing material, store artifacts, or real publisher configuration.
 
 State-changing behavior requires tests for the expected target, expected version, dry-run output, conflict handling, and post-operation reconciliation.
+
+Chrome Web Store tests must use injected tokens and mocked HTTP responses. Do not run store mutations from the public CI workflow.

@@ -13,9 +13,10 @@ test("help distinguishes offline planning from explicit submission", () => {
   assert.equal(result.status, 0);
   assert.match(result.stdout, /Plan is offline/);
   assert.match(result.stdout, /Only submit commits/);
+  assert.match(result.stdout, /Chrome mutations are dry runs unless --execute/);
 });
 
-test("providers lists both planned adapters", () => {
+test("providers lists both adapters", () => {
   const result = spawnSync(process.execPath, [cli, "providers"], {
     encoding: "utf8",
   });

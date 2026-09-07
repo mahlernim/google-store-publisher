@@ -1,14 +1,17 @@
 {
-  "name": "@google-store-publisher/cli",
+  "name": "@google-store-publisher/chrome-web-store",
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "bin": {
-    "store-publisher": "dist/index.js"
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
   },
   "dependencies": {
-    "@google-store-publisher/chrome-web-store": "workspace:*",
-    "@google-store-publisher/google-play": "workspace:*",
     "@google-store-publisher/core": "workspace:*"
   },
   "scripts": {

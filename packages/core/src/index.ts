@@ -9,6 +9,7 @@ export const operations = [
   "submit",
   "status",
   "rollout",
+  "cancel",
 ] as const;
 
 export type Operation = (typeof operations)[number];
@@ -32,7 +33,7 @@ export interface ReleaseTarget {
 
 export interface ExpectedRelease {
   target: ReleaseTarget;
-  version: string;
+  version?: string;
   artifactPath?: string;
 }
 

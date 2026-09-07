@@ -2,6 +2,9 @@ provider: chrome-web-store
 publisher: "publisher-id"
 item: "extension-id"
 artifact: "dist/extension.zip"
+authentication:
+  serviceAccountEnvironment: "CWS_SERVICE_ACCOUNT"
+  projectEnvironment: "CWS_PROJECT_ID"
 publish:
   type: staged
   blockOnWarnings: true

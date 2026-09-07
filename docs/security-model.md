@@ -12,7 +12,7 @@
 
 The CLI accepts public identifiers and artifact paths. Authentication is delegated to provider-supported credential mechanisms. Secrets must not be stored in repository configuration.
 
-CI should prefer short-lived workload identity credentials. Local use should prefer platform credential stores or application default credentials where the provider supports them.
+CI should prefer short-lived workload identity credentials. The Chrome provider accepts an injected short-lived access token and otherwise uses Google Cloud CLI service-account impersonation. It does not read service-account key files or OAuth refresh tokens.
 
 ## Required guards
 
@@ -25,6 +25,8 @@ Before mutation, an adapter verifies:
 5. Explicit execution mode
 
 After mutation, an adapter fetches status independently and returns both normalized and provider-native states.
+
+Chrome mutation commands are dry runs unless `--execute` is present. Submission re-uploads the locally validated ZIP immediately before the publish request. This binds the requested version and hash to the draft being submitted.
 
 ## Logging
 
