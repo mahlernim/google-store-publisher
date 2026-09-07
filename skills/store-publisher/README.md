@@ -1,5 +1,5 @@
 # Store Publisher skill
 
-The installable skill is intentionally deferred until the CLI has been exercised against provider sandboxes or non-production targets.
+This directory is an installable Codex skill for the repository CLI.
 
-The future skill will orchestrate the CLI and preserve provider-specific release gates. It will not contain credentials or duplicate API implementation.
+Install it at `~/.codex/skills/store-publisher` and restart Codex. The skill contains no credentials and does not duplicate provider implementation.

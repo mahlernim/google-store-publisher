@@ -17,6 +17,9 @@ importers:
 
   packages/cli:
     dependencies:
+      '@google-store-publisher/chrome-web-store':
+        specifier: workspace:*
+        version: link:../../providers/chrome-web-store
       '@google-store-publisher/core':
         specifier: workspace:*
         version: link:../core
@@ -31,6 +34,12 @@ importers:
       google-auth-library:
         specifier: ^10.0.0
         version: 10.9.1
+
+  providers/chrome-web-store:
+    dependencies:
+      '@google-store-publisher/core':
+        specifier: workspace:*
+        version: link:../../packages/core
 
 packages:
 

@@ -6,8 +6,6 @@
   },
   "include": ["src/**/*.ts"],
   "references": [
-    { "path": "../google-play" },
-    { "path": "../core" },
-    { "path": "../../providers/chrome-web-store" }
+    { "path": "../../packages/core" }
   ]
 }

@@ -4,6 +4,7 @@ import { GooglePlay, GoogleTransport, PlayError, parseManifest, canonical, verif
 import { mkdir, open, readFile, rename, unlink, access } from "node:fs/promises";
 import { resolve, dirname, join } from "node:path";
 import { parseArgs } from "node:util";
+import { chromeErrorResult, runChrome } from "./chrome.js";
 
 const help = `Google Store Publisher
 
@@ -15,13 +16,21 @@ const help = `Google Store Publisher
   store-publisher play upload --manifest release.json --bundletool bundletool.jar --execute
   store-publisher play validate --manifest release.json --execute
   store-publisher play submit --manifest release.json --execute
+  store-publisher chrome status --publisher ID --item ID
+  store-publisher chrome validate --artifact extension.zip --version 1.2.3
+  store-publisher chrome upload --publisher ID --item ID --artifact extension.zip --version 1.2.3 [--execute]
+  store-publisher chrome submit --publisher ID --item ID --artifact extension.zip --version 1.2.3 [--staged] [--execute]
+  store-publisher chrome cancel --publisher ID --item ID --version 1.2.3 [--execute]
+  store-publisher chrome rollout --publisher ID --item ID --version 1.2.3 --percentage 100 [--execute]
 
 All output is JSON except help and providers. Plan is offline and verifies the AAB.
 Status and wait are read-only. Inspect creates and deletes a temporary edit.
 Upload and validate stage an edit. Only submit commits it for review.
 --state-dir defaults to .play-state. Share one state directory across operations for an app.
 Java, jarsigner and keytool come from PATH, or --java, --jarsigner and --keytool.
-Authentication uses Google Application Default Credentials. Chrome is not implemented yet.
+Play authentication uses Google Application Default Credentials.
+Chrome accepts CWS_ACCESS_TOKEN or gcloud service-account impersonation.
+Chrome mutations are dry runs unless --execute is present.
 `;
 const output = (value: unknown) => process.stdout.write(JSON.stringify(value) + "\n");
 const required = (value: string | undefined, key: string) => {
@@ -34,10 +43,18 @@ async function main() {
     package: { type: "string" }, track: { type: "string" }, "version-code": { type: "string" },
     manifest: { type: "string" }, bundletool: { type: "string" }, "state-dir": { type: "string" },
     timeout: { type: "string" }, java: { type: "string" }, jarsigner: { type: "string" }, keytool: { type: "string" },
+    publisher: { type: "string" }, item: { type: "string" }, artifact: { type: "string" },
+    version: { type: "string" }, percentage: { type: "string" }, project: { type: "string" },
+    "service-account": { type: "string" }, staged: { type: "boolean" },
+    "skip-review": { type: "boolean" }, "allow-warnings": { type: "boolean" },
   } });
   if (v.help || positionals.length === 0) { process.stdout.write(help); return; }
   if (positionals[0] === "providers" && positionals.length === 1) { process.stdout.write(providers.join("\n") + "\n"); return; }
   const [provider, command] = positionals;
+  if (provider === "chrome" && positionals.length === 2) {
+    await runChrome(command, v, output);
+    return;
+  }
   if (provider !== "play" || positionals.length !== 2 || !command || !["plan", "inspect", "status", "wait", "upload", "validate", "submit"].includes(command)) throw new PlayError("ARGUMENT", "Unknown command. Run --help.");
   const allowed: Record<string, string[]> = {
     plan: ["manifest", "bundletool", "java", "jarsigner", "keytool"],
@@ -107,6 +124,12 @@ async function main() {
   } finally { await lock.close(); await unlink(lockPath); }
 }
 main().catch(error => {
+  const chrome = chromeErrorResult(error);
+  if (chrome) {
+    output({ error: chrome });
+    process.exitCode = 1;
+    return;
+  }
   const safe = error instanceof PlayError ? error : new PlayError("LOCAL_ERROR", "The command could not complete. Check arguments, files and tool installation. Raw error details are withheld to protect credentials.");
   output({ error: { code: safe.code, message: safe.message, uncertain: safe.uncertain } });
   process.exitCode = 1;
