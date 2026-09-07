@@ -1,0 +1,7 @@
+provider: chrome-web-store
+publisher: "publisher-id"
+item: "extension-id"
+artifact: "dist/extension.zip"
+publish:
+  type: staged
+  blockOnWarnings: true

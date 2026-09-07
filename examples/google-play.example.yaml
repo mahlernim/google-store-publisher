@@ -1,0 +1,8 @@
+provider: google-play
+package: "com.example.application"
+track: "closed-test-track"
+artifact: "app-release.aab"
+release:
+  status: completed
+  notes:
+    en-US: "Example release notes"

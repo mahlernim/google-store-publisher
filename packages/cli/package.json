@@ -1,0 +1,17 @@
+{
+  "name": "@google-store-publisher/cli",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "store-publisher": "dist/index.js"
+  },
+  "dependencies": {
+    "@google-store-publisher/core": "workspace:*"
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "lint": "tsc -b --pretty false",
+    "typecheck": "tsc -b --pretty false"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "google-store-publisher",
+  "version": "0.0.0",
+  "private": true,
+  "description": "A safe, composable publishing toolkit for Google Play and the Chrome Web Store.",
+  "license": "Apache-2.0",
+  "packageManager": "pnpm@11.19.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "clean": "tsc -b --clean",
+    "lint": "tsc -b --pretty false",
+    "test": "pnpm build && node --test tests/*.test.mjs",
+    "typecheck": "tsc -b --pretty false"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "typescript": "^5.9.0"
+  }
+}
