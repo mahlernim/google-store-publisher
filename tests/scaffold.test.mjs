@@ -5,13 +5,14 @@ import test from "node:test";
 
 const cli = fileURLToPath(new URL("../packages/cli/dist/index.js", import.meta.url));
 
-test("help states that the scaffold performs no mutations", () => {
+test("help distinguishes offline planning from explicit submission", () => {
   const result = spawnSync(process.execPath, [cli, "--help"], {
     encoding: "utf8",
   });
 
   assert.equal(result.status, 0);
-  assert.match(result.stdout, /performs no network or store mutations/i);
+  assert.match(result.stdout, /Plan is offline/);
+  assert.match(result.stdout, /Only submit commits/);
 });
 
 test("providers lists both planned adapters", () => {

@@ -4,7 +4,7 @@ Google Store Publisher is a planned, safety-first publishing toolkit for Google 
 
 ## Current status
 
-This repository is an initial scaffold. It contains shared release contracts, a buildable CLI shell, architecture documentation, and CI. It does not authenticate with Google or perform uploads, submissions, cancellations, or rollouts yet.
+The Google Play testing-track provider now supports artifact verification, separate upload/validate/submit stages, lifecycle status and durable local journals. See the [Google Play guide](providers/google-play/README.md). Live Play acceptance has not yet been tested. Chrome Web Store, skills and MCP remain planned.
 
 ## Why this repository exists
 
@@ -21,13 +21,14 @@ store-publisher status
 store-publisher rollout
 ```
 
-Read-only inspection will be the default. State-changing commands will require an exact provider, target, artifact version, and explicit execution mode.
+The implemented commands use the `play` prefix. Status and wait are read-only. Inspect creates a temporary edit and requires explicit execution. Plan verifies artifacts offline. Release mutations require an exact manifest and explicit execution mode.
 
 ## Repository layout
 
 ```text
 packages/core/               Shared contracts and normalized results
 packages/cli/                Command-line entry point
+packages/google-play/        Implemented Android Publisher adapter
 providers/chrome-web-store/  Chrome Web Store API v2 design notes
 providers/google-play/       Google Play Android Publisher design notes
 skills/store-publisher/      Future agent skill
@@ -49,8 +50,8 @@ corepack pnpm test
 
 1. Implement read-only Chrome Web Store API v2 status inspection.
 2. Add Chrome package upload, validation, submission, and staged publishing.
-3. Implement read-only Google Play track and release lifecycle inspection.
-4. Add fail-closed Google Play test-track publication.
+3. Validate the implemented Google Play workflow against a dedicated test app.
+4. Extend Google Play coverage after testing-track acceptance.
 5. Stabilize the CLI and publish an agent skill.
 6. Expose the proven operations through a narrow MCP server.
 
