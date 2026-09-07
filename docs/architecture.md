@@ -43,4 +43,4 @@ An existing review is a conflict. The adapter must not cancel or supersede it im
 
 ## Automation layers
 
-The CLI is the source of truth. CI workflows and the installable skill call the CLI. A future MCP server exposes only bounded CLI capabilities and adds no publishing logic of its own.
+The CLI is the source of truth. CI workflows and the independent playstore-publisher and chrome-webstore-publisher skills call the same CLI. Each skill loads only its provider's instructions. A future MCP server exposes only bounded CLI capabilities and adds no publishing logic of its own.

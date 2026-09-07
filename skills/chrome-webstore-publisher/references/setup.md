@@ -11,7 +11,7 @@ cd packages/cli
 npm link
 ```
 
-Confirm `store-publisher --help` succeeds before using the skill. The source checkout is currently required because the CLI has not been released as a package.
+Confirm `store-publisher --help` succeeds before using the skill. The source checkout is currently required because the CLI has not been released as a package. Alternatively, use `node /absolute/path/to/google-store-publisher/packages/cli/dist/index.js` in place of `store-publisher` without npm link. Resolve artifact paths absolutely when working across repositories. Reuse existing authentication rather than creating another identity automatically.
 
 ## Authentication
 

@@ -39,7 +39,8 @@ packages/cli/                Command-line entry point
 packages/google-play/        Implemented Android Publisher adapter
 providers/chrome-web-store/  Chrome Web Store API v2 design notes
 providers/google-play/       Google Play Android Publisher design notes
-skills/store-publisher/      Installable Codex and agent skill
+skills/playstore-publisher/  Google Play publishing skill
+skills/chrome-webstore-publisher/ Chrome extension publishing skill
 mcp/                         Future bounded MCP server
 examples/                    Credential-free configuration examples
 docs/                        Architecture and security model
@@ -54,9 +55,9 @@ node packages/cli/dist/index.js --help
 corepack pnpm test
 ```
 
-## Install the skill
+## Install the skills
 
-Build and link the CLI from a clone, then copy or link `skills/store-publisher` to `~/.codex/skills/store-publisher`.
+Build and link the shared CLI from a clone, then install `skills/playstore-publisher` and `skills/chrome-webstore-publisher` into your Codex skills directory. Each skill is independently installable and contains its own setup reference. Invoke them as `$playstore-publisher` and `$chrome-webstore-publisher`.
 
 ```shell
 corepack pnpm install --frozen-lockfile
@@ -65,7 +66,7 @@ cd packages/cli
 npm link
 ```
 
-Restart Codex after installing the skill. A packaged installer will replace these source-install steps after the CLI interface has been exercised against owned store items.
+If the old combined `store-publisher` skill is installed, archive it outside the skills directory after verifying the replacements so it does not compete with them. Installing skills does not configure Google credentials or submit any release. A packaged CLI installer remains future work.
 
 ## Roadmap
 
