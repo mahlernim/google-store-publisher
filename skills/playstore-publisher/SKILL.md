@@ -10,6 +10,7 @@ Use the shared repository CLI, not handwritten provider API calls. Read [setup a
 ## Choose the requested operation
 
 - For status questions, use `play status` with the exact package, track and version where known. Do not build, create edits or submit changes.
+- For an already-uploaded version, use the [promotion workflow](references/promotion.md). Do not reupload, rebuild or increment its version code. Production may be read as a source, never used as a destination.
 - For a fresh authorized testing release, verify app-repository instructions, target, release artifact provenance and embedded version. Review configuration with `play inspect --execute` only when no existing edit or journal is active, then prepare the exact release manifest.
 - Run offline `play plan` with that manifest and bundletool before `play upload --execute`, `play validate --execute` and `play submit --execute`. Preserve the same manifest and absolute state directory throughout. Only submit commits.
 - For an interrupted workflow, inspect its journal and remote status first. Continue only from a confirmed uploaded or validated phase. Do not restart the fresh-release sequence.
