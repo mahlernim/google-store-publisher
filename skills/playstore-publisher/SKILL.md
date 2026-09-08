@@ -5,7 +5,7 @@ description: Inspect Google Play release status and publish Android AABs to exis
 
 # Play Store Publisher
 
-Use the shared repository CLI, not handwritten provider API calls. Read [setup and recovery boundaries](references/setup.md) before Play operations. Verify the CLI help matches the intended command.
+Prefer the shared repository CLI over handwritten provider API calls. Read [setup and recovery boundaries](references/setup.md) before Play operations. Verify the CLI help matches the intended command. If existing API access is unavailable, read the [Console fallback](references/console-fallback.md) before continuing through an existing signed-in session.
 
 ## Choose the requested operation
 
@@ -23,4 +23,4 @@ Execute mutations only within the user's authorized app, track and release scope
 
 Stop on identity, certificate, version, configuration or review conflicts. Never retry an uncertain upload, validation or commit automatically. Preserve the journal and lock evidence and reconcile the saved edit or Console before changing local state.
 
-Report upload, validation, submission, review, approval and publication separately, retaining native lifecycle states. Do not equate commit success or wait completion with tester availability.
+Report upload, validation, submission, review, approval and publication separately, retaining native lifecycle states. If Console shows “Changes in review” while quick checks are running, report submission requested, pending quick checks. Do not equate that heading, commit success or wait completion with review started or tester availability.
