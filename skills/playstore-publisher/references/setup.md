@@ -4,7 +4,7 @@
 
 Reuse a trusted clone of `https://github.com/mahlernim/google-store-publisher`. The CLI is not yet a published package. From its root run `corepack pnpm install --frozen-lockfile` and `corepack pnpm build`. Invoke `node /absolute/path/to/google-store-publisher/packages/cli/dist/index.js --help`. Use this absolute entry point in place of `store-publisher` below, or link it with `npm link` from `packages/cli`. Do not confuse the publisher checkout with the Android app checkout. Resolve the manifest and bundletool paths absolutely.
 
-Reuse existing credentials. Missing credentials or new account permissions require setup, not printing credential files or automatically granting account access.
+Reuse existing credentials. Missing API credentials or HTTP 403 do not establish a release conflict or the precise cause of an access failure. Do not print credential files or automatically grant account access. An authorized release can continue through the [Console fallback](console-fallback.md) when its conditions are met.
 
 Google Play support is limited to existing testing tracks, one AAB per release, and full rollout. Production and staged rollout are unsupported.
 
@@ -24,7 +24,9 @@ For a fresh release, the sequence is below. A status-only request needs only sta
 
 Keep the manifest and `.play-state` directory unchanged between mutation steps. Upload and validation do not submit the release. Submit is the only commit.
 
-Status and wait are read-only. Inspect creates and deletes a temporary edit and can invalidate an older edit owned by the same identity. Do not run it while an existing edit or journal is active. Serialize operations for the app, including Console work. Share one absolute state directory across commands and preserve it across CI runs. Local locks do not coordinate separate machines. Inspect covers Google Groups, not individual email tester lists.
+Status and wait are read-only. Inspect creates and deletes a temporary edit and can invalidate an older edit owned by the same identity. Do not run it while an existing edit or journal is active. Serialize operations for the app, including Console work. Share one absolute state directory across stateful commands and preserve it across CI runs. Local locks do not coordinate separate machines. Inspect covers Google Groups, not individual email tester lists.
+
+`--state-dir` is accepted by `inspect`, `upload`, `validate`, `submit`, and the three `promote-prepare`, `promote-validate`, `promote-submit` commands. Omit it for `status`, `wait`, `plan`, and `promote-plan`. For example, use `play status --package com.example.app --track alpha --version-code 42` without a state directory. Check the installed CLI help when versions differ.
 
 Use the publisher checkout's `examples/google-play.release.json` for field names and `providers/google-play/README.md` for detailed commands. Obtain the configuration fingerprint from a reviewed inspection. Use the expected upload certificate, not the app-signing certificate. Verify an existing immutable release artifact rather than rebuilding merely to answer a status request.
 

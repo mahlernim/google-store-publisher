@@ -42,6 +42,12 @@ See [promotion guidance](../../skills/playstore-publisher/references/promotion.m
 
 ## Recovery and CI details
 
+If API access is unavailable but an existing signed-in Console session can access the authorized app, follow the [skill's Console fallback](../../skills/playstore-publisher/references/console-fallback.md). Reconcile any active or uncertain edit first. Console actions do not count as live validation of this CLI.
+
+`--state-dir` is supported by inspect, upload, validate, submit and promotion mutations. Omit it for status, wait, plan and promote-plan.
+
+Console may display “Changes in review” before quick checks finish. When the accompanying message says changes will be sent after those checks pass, report submission requested, pending quick checks. Do not infer review started or tester availability from the heading alone.
+
 Keep the same manifest and state directory across upload, validate and submit. The default `.play-state` is ignored by Git. Preserve it securely between CI steps and runs. Use app-scoped CI concurrency with cancellation disabled. Never automatically retry mutation commands.
 
 The journal records each phase before mutation. Uploaded and validated journals can continue with the next command. Creating, uploading, validating or committing phases require manual reconciliation with the saved Google edit or Console. There is no automatic phase override or edit deletion command. For uncertain commits, query version-filtered status and Publishing overview before any new submission. Archive completed or explicitly reconciled journals before new releases. Remove stale locks only after checking the process is gone and reconciling the operation. Inspect has no release journal, so a failed inspect may require checking for an outstanding temporary edit.

@@ -31,7 +31,8 @@ const help = `Google Store Publisher
 All output is JSON except help and providers. Plan is offline and verifies the AAB.
 Status and wait are read-only. Inspect creates and deletes a temporary edit.
 Upload and validate stage an edit. Only submit commits it for review.
---state-dir defaults to .play-state. Share one state directory across operations for an app.
+--state-dir defaults to .play-state for inspect, upload, validate, submit and promotion mutations.
+Share one absolute state directory for these commands. Omit it for status, wait, plan and promote-plan.
 Java, jarsigner and keytool come from PATH, or --java, --jarsigner and --keytool.
 Play authentication uses Google Application Default Credentials.
 Chrome accepts CWS_ACCESS_TOKEN or gcloud service-account impersonation.
