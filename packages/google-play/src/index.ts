@@ -3,6 +3,7 @@ import { PlayError, type Transport } from "./transport.js";
 export * from "./manifest.js";
 export * from "./transport.js";
 export * from "./artifact.js";
+export * from "./promotion.js";
 
 type ObjectData = Record<string, unknown>;
 interface Track extends ObjectData { track: string; releases?: ObjectData[] }

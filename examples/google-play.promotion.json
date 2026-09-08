@@ -1,0 +1,7 @@
+{
+  "packageName": "com.example.app",
+  "sourceTrack": "internal",
+  "destinationTracks": ["alpha", "beta"],
+  "versionCode": "42",
+  "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+}

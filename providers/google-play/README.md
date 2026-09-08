@@ -34,7 +34,13 @@ Upload creates an edit and uploads the bundle without changing the track. Valida
 
 Commit success is not approval or tester availability. Native lifecycle states are retained. Approved-but-not-published may require managed publishing action. Wait succeeds on the PUBLISHED lifecycle, which can also describe a halted release, not a verified tester installation. Verify actual availability separately when required. Timeout exits 3 and other failures exit 1.
 
-## Recovery and CI
+## Existing-version promotion
+
+Use `examples/google-play.promotion.json` for an exact existing version and bundle SHA-256, a source track, and one or more existing testing destinations. Run `play promote-plan`, `play promote-prepare --execute`, `play promote-validate --execute`, then `play promote-submit --execute`, each with `--manifest promotion.json`. Mutations share the existing app lock and journal in `--state-dir`. Review prepare's baseline and desired output before validation. Production sources are allowed, production destinations are not. No artifact upload occurs.
+
+See [promotion guidance](../../skills/playstore-publisher/references/promotion.md) for lifecycle checks, settings preservation, offline-plan limits and interrupted-operation recovery. Publishing support remains mock-tested, not live-validated.
+
+## Recovery and CI details
 
 Keep the same manifest and state directory across upload, validate and submit. The default `.play-state` is ignored by Git. Preserve it securely between CI steps and runs. Use app-scoped CI concurrency with cancellation disabled. Never automatically retry mutation commands.
 

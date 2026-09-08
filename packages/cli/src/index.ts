@@ -5,6 +5,7 @@ import { mkdir, open, readFile, rename, unlink, access } from "node:fs/promises"
 import { resolve, dirname, join } from "node:path";
 import { parseArgs } from "node:util";
 import { chromeErrorResult, runChrome } from "./chrome.js";
+import { runPromotion } from "./promotion.js";
 
 const help = `Google Store Publisher
 
@@ -16,6 +17,10 @@ const help = `Google Store Publisher
   store-publisher play upload --manifest release.json --bundletool bundletool.jar --execute
   store-publisher play validate --manifest release.json --execute
   store-publisher play submit --manifest release.json --execute
+  store-publisher play promote-plan --manifest promotion.json
+  store-publisher play promote-prepare --manifest promotion.json --execute
+  store-publisher play promote-validate --manifest promotion.json --execute
+  store-publisher play promote-submit --manifest promotion.json --execute
   store-publisher chrome status --publisher ID --item ID
   store-publisher chrome validate --artifact extension.zip --version 1.2.3
   store-publisher chrome upload --publisher ID --item ID --artifact extension.zip --version 1.2.3 [--execute]
@@ -51,6 +56,10 @@ async function main() {
   if (v.help || positionals.length === 0) { process.stdout.write(help); return; }
   if (positionals[0] === "providers" && positionals.length === 1) { process.stdout.write(providers.join("\n") + "\n"); return; }
   const [provider, command] = positionals;
+  if (provider === "play" && positionals.length === 2 && command?.startsWith("promote-")) {
+    await runPromotion(command, v, output);
+    return;
+  }
   if (provider === "chrome" && positionals.length === 2) {
     await runChrome(command, v, output);
     return;
