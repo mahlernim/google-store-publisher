@@ -1,4 +1,4 @@
 interface:
   display_name: "Play Store Publisher"
-  short_description: "Publish and inspect Google Play test releases"
-  default_prompt: "Use $playstore-publisher to inspect or publish this Google Play testing release."
+  short_description: "Publish Google Play releases and localized listings"
+  default_prompt: "Use $playstore-publisher to inspect or publish this Google Play release and its scoped store-listing changes."
