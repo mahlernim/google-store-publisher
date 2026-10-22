@@ -48,6 +48,8 @@ docs/                        Architecture and security model
 
 ## Build and test
 
+Use Node.js 22.23.4 or later within 22.x, 24.22.1 or later within 24.x, or 26.12.1 or later within 26.x. These minimum versions include the [October 2026 security fixes](https://nodejs.org/en/blog/vulnerability/october-2026-security-releases). Check `node --version` before building or running the CLI. Updating this repository does not update your installed Node.js runtime.
+
 ```shell
 corepack pnpm install
 corepack pnpm build
