@@ -4,6 +4,8 @@ Thanks for helping build Google Store Publisher.
 
 ## Development
 
+Install a supported patched Node.js version listed in the [build requirements](README.md#build-and-test). CI checks the latest 22.x release at or above 22.23.4.
+
 ```shell
 corepack pnpm install
 corepack pnpm lint
